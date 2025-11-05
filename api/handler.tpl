@@ -5,6 +5,7 @@ package {{.PkgName}}
 
 import (
 	"net/http"
+	"qstar-server/service/thirdfunc/benchmark"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 	{{.ImportPackages}}
@@ -19,7 +20,8 @@ func {{.HandlerName}}(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		{{end}}l := {{.LogicName}}.New{{.LogicType}}(r.Context(), svcCtx)
+		{{end}}req.Ip = benchmark.GetClientIP(r)
+		l := {{.LogicName}}.New{{.LogicType}}(r.Context(), svcCtx)
 		{{if .HasResp}}resp, {{end}}err := l.{{.Call}}({{if .HasRequest}}&req{{end}})
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
