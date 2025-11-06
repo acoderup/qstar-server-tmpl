@@ -142,11 +142,12 @@ func (l *{{.logic}})HandSi(req *types.SpinRequest, Response *cli.SlotsPlayRespon
 		}
 		si.Lw = lwMap
 	}
-	si.Np = mathx.RoundFloat(si.Np * customEg.DfMul)
 
 	si.Tb = mathx.RoundFloat(si.Tb * customEg.DfMul)
 	si.Tbb = mathx.RoundFloat(si.Tbb * customEg.DfMul)
+
 	si.Ssaw = mathx.RoundFloat(si.Ssaw * customEg.DfMul)
+	si.Np = mathx.RoundFloat(si.Ssaw - si.Tb)
 
 	return si
 }
